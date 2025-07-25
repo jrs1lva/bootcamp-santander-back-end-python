@@ -10,3 +10,6 @@ print(preco)
 
 preco //= 2 #divide o número e retorna inteiro
 print(preco)
+
+preco /= 2
+print(preco)
