@@ -1,0 +1,6 @@
+name = input('Type your name: ')
+age = input('write your age: ')
+print(name, age)
+print(name, age, end="...\n")
+print(name, age, sep="#")
+print(f'Your name is {name} and your age is {age} ')
