@@ -1,25 +1,44 @@
-while code != -1:
-    
-    name = input("Type your name: ")
-    balance = 0.0
+balance = 0.0
+code = 0
+name = input("Type your name: ")
+while (float(code)!= -1):
 
-    print(f"""Hi {name.title()}, welcome to Center Bank.
+    code = input(f"""Hi {name.title()}, welcome to Center Bank.
     Your balance: {balance}$
     Type a number to choose the operation:
     1- Deposit
     2- Withdraw
-    3- Exit
     """)
-    if ()
-    deposit = input("Enter deposit amount: ")
 
-    if (float(deposit) > 0):
-        balance += float(deposit)
+    if (float(code) == 1) :
+        deposit = input("Enter deposit amount: ")
+        while (float(deposit) < 0):
+            print("Value invalid, try again.")
+            deposit = input("Enter deposit amount:\nEnter -1 to exit:")
+
+        if (float(deposit) > 0):
+            balance += float(deposit)
+            print(f"Your new balance: {balance}$")
+
+    elif (float(code) == 2):
+        withdraw = input("Enter withdraw amount: ")
+
+        while (float(withdraw) <= 0 or float(withdraw) > balance):
+            if (float(withdraw) <= 0):
+                print("Value invalid, try again.")
+                withdraw = input("Enter withdraw amount: ")
+
+            elif (float(withdraw) > balance):
+                print("Insufficient balance, try again.")
+                withdraw = input("Enter withdraw amount: ")
+
+        balance -= float(withdraw)
+        print("Withdraw sucessfull!")
         print(f"Your new balance: {balance}$")
     else:
-        print("Value invalid, please try again.")
-        print(f"Balance current: {balance}$")
+        print("Invalid option, try again.")
+        
+    print("Thank you for using Center Bank!")
+    code = input("Type -1 to exit or any other number to continue.")
 
-    code = input(""" You 
-
-    """)
+print("See you next time!")
