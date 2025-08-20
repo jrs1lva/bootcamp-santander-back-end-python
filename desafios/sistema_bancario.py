@@ -21,19 +21,19 @@ while (float(code)!= -1):
             print(f"Your new balance: {balance}$")
 
     elif (float(code) == 2):
-        withdraw = input("Enter withdraw amount: ")
+        withdrawal = input("Enter withdrawal amount: ")
 
-        while (float(withdraw) <= 0 or float(withdraw) > balance):
-            if (float(withdraw) <= 0):
+        while (float(withdrawal) <= 0 or float(withdrawal) > balance):
+            if (float(withdrawal) <= 0):
                 print("Value invalid, try again.")
-                withdraw = input("Enter withdraw amount: ")
+                withdrawal = input("Enter withdrawal amount: ")
 
-            elif (float(withdraw) > balance):
+            elif (float(withdrawal) > balance):
                 print("Insufficient balance, try again.")
-                withdraw = input("Enter withdraw amount: ")
+                withdrawal = input("Enter withdrawal amount: ")
 
-        balance -= float(withdraw)
-        print("Withdraw sucessfull!")
+        balance -= float(withdrawal)
+        print("Withdrawal sucessfull!")
         print(f"Your new balance: {balance}$")
     else:
         print("Invalid option, try again.")
