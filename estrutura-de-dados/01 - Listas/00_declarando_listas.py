@@ -12,3 +12,10 @@ print(numeros)
 
 carro = ["Ferrari", "F8", 4200000, 2020, 2900, "São Paulo", True]
 print(carro)
+
+
+times = ["Corinthians", "Bahia", "Barcelona", "Santos"]
+print(times)
+
+Corinthinas = ["Time da virada", 1910, "Mundial", "Memphis", "Garro"]
+print(Corinthinas)

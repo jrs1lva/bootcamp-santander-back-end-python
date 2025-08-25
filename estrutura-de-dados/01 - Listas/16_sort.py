@@ -1,3 +1,5 @@
+#esse metodo altera a lista original
+
 linguagens = ["python", "js", "c", "java", "csharp"]
 linguagens.sort()  # ["c", "csharp", "java", "js", "python"]
 print(linguagens)

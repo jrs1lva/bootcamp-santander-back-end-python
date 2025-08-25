@@ -5,3 +5,8 @@ lista.append("Python")
 lista.append([40, 30, 20])
 
 print(lista)  # [1, "Python", [40, 30, 20]]
+
+palmeiras = []
+print(palmeiras)  # []
+palmeiras.append("Sem mundial")
+print(palmeiras)  # ["Sem mundial"]

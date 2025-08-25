@@ -1,3 +1,4 @@
+#esse metodo sorteia
 linguagens = ["python", "js", "c", "java", "csharp"]
 
 print(sorted(linguagens, key=lambda x: len(x)))  # ["c", "js", "java", "python", "csharp"]
