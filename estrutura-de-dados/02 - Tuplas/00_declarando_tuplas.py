@@ -13,3 +13,9 @@ print(numeros)
 
 pais = ("Brasil",)
 print(pais)
+
+faculdades = ("UCSAL", "UFBA", "UNEB",)
+print(faculdades)
+
+faculdades = ("UFRJ", "UEFS")
+print(faculdades)
