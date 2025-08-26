@@ -12,3 +12,10 @@ print("=" * 100)
 
 for chave, valor in contatos.items():
     print(chave, valor)
+
+
+emails = {
+    "adailtonpenga2019@gmail.com": {"nome": "jr", "idade": 21, "sexo": "masculino"}
+}
+for chave, valor in emails.items():
+    print(chave, valor)

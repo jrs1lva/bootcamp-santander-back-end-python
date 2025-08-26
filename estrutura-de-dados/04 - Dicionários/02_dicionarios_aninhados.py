@@ -7,3 +7,20 @@ contatos = {
 
 telefone = contatos["giovanna@gmail.com"]["telefone"]  # "3443-2121"
 print(telefone)
+
+emails = {
+    "adailton.junior@ucsal.edu.br": {"nome": "jr", "matricula": 200512, "nascimento": "29/06/2004"},
+    "adailtonpenga2019@gmail.com": {"assinatura": "disney+", "jogo": "fifa", "apelido": "jota"}
+}
+
+brasileirao = {
+    "times": [
+    {"nome": "Corinthians", "posicao": 10, "cor": "P&B"},
+    {"nome": "Flamengo", "posicao": 1, "cor": "Rubro-Negro"},
+    ]
+}
+
+print(brasileirao["times"][0]["nome"])
+
+for dados in contatos.values():
+    print(dados["nome"])
