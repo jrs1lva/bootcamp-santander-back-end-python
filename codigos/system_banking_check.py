@@ -9,14 +9,32 @@ def depositar(saldo, valor, extrato): #Finalizado
     return saldo, extrato
 
 def sacar(*, saldo, valor, extrato, limite, numero_saques, limite_saques):
-    if numero_saques >= limite_saques:
+    if numero_saques > limite_saques:
         print("Limite de saque diário atingido!")
 
-    elif valor > saldo:
-        print("Saque maior que o saldo")
+    elif "Depósito" not in extrato:
+        print("Ainda não foram realizadas as movimentações!")
 
     elif valor > 500:
         print("Saque maior que 500")
+
+    elif valor > saldo:
+        if (valor <= saldo + limite):
+            """
+            saldo = 200
+            limite = 100
+            saque = 250
+            saldo - saque = -50
+            -50(saldo) -100(limite) = 50
+            """
+            saldo -= valor
+            limite = (-(saldo)) - limite
+            extrato += f"Saque com limite: R${valor:.2f}\n"
+            print("Saque realizado com auxílio do limite")
+
+            return saldo, extrato, limite
+        else:
+            print("Valor de saque indisponível")
 
     else:
         saldo -= valor
@@ -68,7 +86,7 @@ def main():
             saldo, extrato = depositar(saldo, valor, extrato)
         elif codigo == 's':
             valor = float(input("Valor do saque » "))
-            saldo, extrato = sacar(saldo=saldo, valor=valor, extrato=extrato, limite = limite, numero_saques = numero_saques, limite_saques = LIMITE_SAQUES)
+            saldo, extrato, limite = sacar(saldo=saldo, valor=valor, extrato=extrato, limite = limite, numero_saques = numero_saques, limite_saques = LIMITE_SAQUES)
         elif codigo == 'e':
             exibir_extrato(saldo, extrato = extrato)
         elif codigo == 'q':
