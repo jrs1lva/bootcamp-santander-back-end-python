@@ -12,11 +12,13 @@ def sacar(*, saldo, valor, extrato, limite, numero_saques, limite_saques):
     if numero_saques > limite_saques:
         print("Limite de saque diário atingido!")
 
+    elif valor > 500:
+        print("Saque maior que 500")
+
     elif "Depósito" not in extrato:
         print("Ainda não foram realizadas as movimentações!")
 
-    elif valor > 500:
-        print("Saque maior que 500")
+
 
     elif valor > saldo:
         if (valor <= saldo + limite):
@@ -28,28 +30,29 @@ def sacar(*, saldo, valor, extrato, limite, numero_saques, limite_saques):
             -50(saldo) -100(limite) = 50
             """
             saldo -= valor
-            limite = (-(saldo)) - limite
+            numero_saques += 1
+            limite = limite + saldo
             extrato += f"Saque com limite: R${valor:.2f}\n"
             print("Saque realizado com auxílio do limite")
 
-            return saldo, extrato, limite
         else:
             print("Valor de saque indisponível")
 
     else:
         saldo -= valor
+        numero_saques += 1
         extrato += f"Saque: R${valor:.2f}\n"
         print("▪▪▪ Saque realizado com sucesso! ▪▪▪")
-        return saldo, extrato
+
+    return saldo, extrato, limite, numero_saques
     
 def exibir_extrato(saldo, /, *, extrato): #Finalizado
-    print("▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪ EXTRATO ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪\n")
-    if (extrato == ''):
-        print("Ainda não houveram movimentações nessa conta!")
+    print("\n📄 ▪▪▪ EXTRATO ▪▪▪ 📄\n")
+    if extrato == '':
+        print("Ainda não houveram movimentações nessa conta.")
     else:
-        print(f"""Saldo: R${saldo}
-
-{extrato}""")
+        print(extrato)
+    print(f"\nSaldo atual: R${saldo:.2f}")
 
 def menu(saldo): #Finalizado
     codigo = input(f"""▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪ MENU ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪
@@ -61,7 +64,7 @@ Digite uma letra para escolher a operação:
 [s] Saque
 [e] Extrato
 [nc] Nova Conta
-[ls] Listar contas
+[lc] Listar contas
 [nu] Novo usuário
 [q] Sair
 
@@ -86,7 +89,7 @@ def main():
             saldo, extrato = depositar(saldo, valor, extrato)
         elif codigo == 's':
             valor = float(input("Valor do saque » "))
-            saldo, extrato, limite = sacar(saldo=saldo, valor=valor, extrato=extrato, limite = limite, numero_saques = numero_saques, limite_saques = LIMITE_SAQUES)
+            saldo, extrato, limite, numero_saques = sacar(saldo=saldo, valor=valor, extrato=extrato, limite = limite, numero_saques = numero_saques, limite_saques = LIMITE_SAQUES)
         elif codigo == 'e':
             exibir_extrato(saldo, extrato = extrato)
         elif codigo == 'q':
