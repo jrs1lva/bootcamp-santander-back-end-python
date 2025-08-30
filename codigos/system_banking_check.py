@@ -1,42 +1,53 @@
-def depositar(saldo, valor, extrato): #Finalizado
+def cadastrar_usuario(contas):
+    cpf = int(input("Digite seu CPF: ").strip()) #só permitir números
+
+    if (cpf in contas):   
+        print("CPF já cadastrado!")
+    else:
+        nome = input("Informe o nome completo: ")
+        nascimento = input("Informe a data de nascimento (dd-mm-aaaa): ")
+        cep = input("Informe o endereço (logradouro, nro - bairro - cidade/sigla estado): ")
+
+        contas[cpf] = {"Nome": nome, "Nascimento": nascimento, "CEP": cep}
+        print("Conta cadastrada com sucesso!")
+    return contas
+
+def listar_contas(contas):
+    if (not contas):
+        print("Ainda não existe conta.")
+    else:
+        print("\n📑 Contas cadastradas:")
+        for cpf, dados in contas.items():
+            print(f"CPF: {cpf} | Nome: {dados['Nome']} | Nascimento: {dados['Nascimento']} | CEP: {dados['CEP']}")
+
+def depositar(saldo, valor, extrato, /): #Finalizado
     if (valor > 0):
         saldo += valor
         extrato += f"Depósito: R${valor:.2f}\n"
         print("\n▪▪▪ Depósito realizado com sucesso! ▪▪▪")
     else:
-        print("Valor inválido!")
+        print("[ERRO] Valor inserido menor que R$0.00")
 
     return saldo, extrato
 
 def sacar(*, saldo, valor, extrato, limite, numero_saques, limite_saques):
-    if numero_saques > limite_saques:
+    if valor < 0:
+        print("[ERRO] Valor inserido menor que R$0.00")
+        
+    elif numero_saques >= limite_saques:
         print("Limite de saque diário atingido!")
 
     elif valor > 500:
-        print("Saque maior que 500")
-
-    elif "Depósito" not in extrato:
-        print("Ainda não foram realizadas as movimentações!")
-
-
+        print("[ERRO] Valor inserido maior que R$500.00")
 
     elif valor > saldo:
         if (valor <= saldo + limite):
-            """
-            saldo = 200
-            limite = 100
-            saque = 250
-            saldo - saque = -50
-            -50(saldo) -100(limite) = 50
-            """
             saldo -= valor
             numero_saques += 1
-            limite = limite + saldo
             extrato += f"Saque com limite: R${valor:.2f}\n"
             print("Saque realizado com auxílio do limite")
-
         else:
-            print("Valor de saque indisponível")
+            print("[ERRO] Valor inserido maior que saldo.")
 
     else:
         saldo -= valor
@@ -65,13 +76,13 @@ Digite uma letra para escolher a operação:
 [e] Extrato
 [nc] Nova Conta
 [lc] Listar contas
-[nu] Novo usuário
 [q] Sair
 
 » """)
     return codigo 
 
 def main():
+    contas = {}
     saldo = 0.0
     codigo = ''
     extrato = ''
@@ -85,10 +96,10 @@ def main():
         codigo = menu(saldo)
 
         if codigo == 'd':
-            valor = float(input("Valor do depósito » "))
+            valor = float(input("Valor do depósito » R$"))
             saldo, extrato = depositar(saldo, valor, extrato)
         elif codigo == 's':
-            valor = float(input("Valor do saque » "))
+            valor = float(input("Valor do saque » R$"))
             saldo, extrato, limite, numero_saques = sacar(saldo=saldo, valor=valor, extrato=extrato, limite = limite, numero_saques = numero_saques, limite_saques = LIMITE_SAQUES)
         elif codigo == 'e':
             exibir_extrato(saldo, extrato = extrato)
@@ -96,13 +107,11 @@ def main():
             print("Volte sempre!")
 
         elif codigo == 'nc':
-            print()
+            cadastrar_usuario(contas)
+
         elif codigo == 'lc':
-            print()
-        elif codigo == 'nu':
-            print()
+            listar_contas(contas)
         else:
             print("Código inválido!")
-
 
 main()
