@@ -96,21 +96,33 @@ def main():
         codigo = menu(saldo)
 
         if codigo == 'd':
-            valor = float(input("Valor do depósito » R$"))
-            saldo, extrato = depositar(saldo, valor, extrato)
+            if (not contas):
+                print("Crie uma conta!")
+            else:
+                valor = float(input("Valor do depósito » R$"))
+                saldo, extrato = depositar(saldo, valor, extrato)
         elif codigo == 's':
-            valor = float(input("Valor do saque » R$"))
-            saldo, extrato, limite, numero_saques = sacar(saldo=saldo, valor=valor, extrato=extrato, limite = limite, numero_saques = numero_saques, limite_saques = LIMITE_SAQUES)
+            if (not contas):
+                print("Crie uma conta!")
+            else:
+                valor = float(input("Valor do saque » R$"))
+                saldo, extrato, limite, numero_saques = sacar(saldo=saldo, valor=valor, extrato=extrato, limite = limite, numero_saques = numero_saques, limite_saques = LIMITE_SAQUES)
         elif codigo == 'e':
-            exibir_extrato(saldo, extrato = extrato)
+            if (not contas):
+                print("Crie uma conta!")
+            else:
+                exibir_extrato(saldo, extrato = extrato)
         elif codigo == 'q':
-            print("Volte sempre!")
+                print("Volte sempre!")
 
         elif codigo == 'nc':
             cadastrar_usuario(contas)
 
         elif codigo == 'lc':
-            listar_contas(contas)
+            if (not contas):
+                print("Crie uma conta!")
+            else:
+                listar_contas(contas)
         else:
             print("Código inválido!")
 
